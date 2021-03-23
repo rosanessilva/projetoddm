@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigation } from '@react-navigation/native';
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -11,6 +12,7 @@ const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 
 function BaseScreen(props) {
+  const navigation = useNavigation();
   return(
     <Stack.Navigator>
       <Stack.Screen name={props.name} children={() => props.children} options={{
@@ -20,19 +22,19 @@ function BaseScreen(props) {
           name= "arrow-back-outline"
             size={25}
             color="#000"
-            onPress={() => props.navigation.navigate('bichos')}
+            onPress={() => navigation.navigate("bichos")} //verificar pq não está voltando...
           />,
         }} /> 
     </Stack.Navigator>
   )
 }
-function HomeScreen({ navigation }){
+function HomeScreen(props, {navigation}){
   
   const [produto, setProduto] = useState({});
   
   useEffect(() => {
     async function loadContent() {
-      const produto = await getProduto(props.route.params.idProduto);
+      const produto = await getProduto(props.idProduto);
       setProduto(produto);
     }
     loadContent();
@@ -59,17 +61,6 @@ function HomeScreen({ navigation }){
 }
 
 function Comentarios({ navigation }){
-  
-  const [produto, setProduto] = useState({});
-  
-  useEffect(() => {
-    async function loadContent() {
-      const produto = await getProduto(props.route.params.idProduto);
-      setProduto(produto);
-    }
-    loadContent();
-  });
-
     return <BaseScreen
       navigation = {navigation}
       name ={"Comentários"}
@@ -87,10 +78,9 @@ export default function Produto(props) {
           options={{
             tabBarIcon: ({ color, size }) => <Ionicons name='information-circle-outline' size={size} color={color} />
           }}
-          name="Informações"
-          initialParams={{ idProduto: props.route.params.idProduto }}
-          component={HomeScreen}
-           />
+          name="Informações">
+          {() => <HomeScreen idProduto={props.route.params.idProduto} />}
+        </Tab.Screen>
         <Tab.Screen 
           options={{
             tabBarIcon: ({ color, size }) => <Ionicons name='reader-outline' size={size} color={color} />
