@@ -5,8 +5,10 @@ import { createStackNavigator } from "@react-navigation/stack";
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { View, Text } from "react-native";
 
-import { getProduto } from '../service/ProdutoService';
+import { getComentarios, getProduto } from '../service/ProdutoService';
 import Card from "../components/card_descricao";
+import CardComentario from "../components/card_comentarios";
+
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -60,13 +62,32 @@ function HomeScreen(props, {navigation}){
     </BaseScreen>
 }
 
-function Comentarios({ navigation }){
+function Comentarios(props, { navigation }){
+
+  const [comentarios, setComentario] = useState({});
+  useEffect(() => {
+    async function loadContent() {
+      const comentarios = await getComentarios(props.idProduto);
+      setComentario(comentarios);
+    }
+    loadContent();
+  });
+
     return <BaseScreen
       navigation = {navigation}
       name ={"Comentários"}
       >
         <View>
-          <Text>Testando</Text>
+          { comentarios.idProduto && 
+          <CardComentario
+            idComentario={comentarios.id}
+            nome ={comentarios.nome}
+            comentario ={comentarios.comentario}
+            foto = {comentarios.foto}
+            estrelas={comentarios.estrelas}
+            hideButton
+          />
+          }
         </View>
     </BaseScreen>
 }
@@ -85,8 +106,9 @@ export default function Produto(props) {
           options={{
             tabBarIcon: ({ color, size }) => <Ionicons name='reader-outline' size={size} color={color} />
           }}
-          name="Comentários"
-          component={Comentarios} />
+          name="Comentários">
+          {() => <Comentarios idProduto={props.route.params.idProduto}/>} 
+          </Tab.Screen>
       </Tab.Navigator>
   );
  

@@ -55,10 +55,35 @@ const port= 3031;
     
     ];
 
-app.get('/',(req, res) => {
-  res.send('Hello Word');
-});
+    const comentarios = [
+      {
+        id: '1',
+        idProduto: '1',
+        foto: 'http://3.bp.blogspot.com/_gl58Mbhzt7A/TGBZhD806tI/AAAAAAAAAHE/DMqYuw3SrfE/s1600/rosto%20antes.jpg',
+        nome: 'Maria Clara',
+        comentario: 'Que poodle mais fofinha!!!',
+        estrelas: '5',
+      },
+      {
+        id: '2',
+        idProduto: '1',
+        foto: 'https://i.pinimg.com/originals/ca/e6/1e/cae61e84e03a0bf4bc5fe18f57d4d1b8.jpg',
+        nome: 'Mercedes',
+        comentario: 'Eles não dão muito amor...',
+        estrelas: '5',
+      },
+      {
+        id: '3',
+        idProduto: '2',
+        foto: 'https://i.pinimg.com/originals/ae/ef/f8/aeeff87b072fe0a9c06b47898d0eee23.jpg',
+        nome: 'Matheus Pontes',
+        comentario: 'Companheiro e guardião! Doberman é o melhor.',
+        estrelas: '5',
+      },
 
+    ];
+
+  
 app.get('/produtos', (req, res) => {
   res.send(produtos);
 });
@@ -66,6 +91,11 @@ app.get('/produtos', (req, res) => {
 app.get('/produtos/:id', (req, res) => {
   const produto = produtos.filter((produto) => produto.id == req.params.id);
   res.send(produto[0]);
+});
+
+app.get('/produtos/:id/comentarios', (req, res) => {
+  const comentario = comentarios.filter((produto) => produto.idProduto == req.params.idProduto);
+  res.send(comentario[0]);
 });
 
 app.listen(port, '0.0.0.0', () => {

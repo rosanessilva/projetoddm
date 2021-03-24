@@ -6,7 +6,6 @@ import { StatusBar } from 'react-native';
  
 import Produtos from './views/Produtos';
 import Produto from './views/Produto';
-import Comentario from './views/screens/comentario';
 
  
 const Stack = createStackNavigator();

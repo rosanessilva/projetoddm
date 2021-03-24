@@ -1,17 +1,16 @@
 import React from 'react';
-import { Button, StyleSheet, Text, View, Image } from "react-native";
+import { StyleSheet, Text, View, Image } from "react-native";
 
-export default function Card(props) {
+export default function CardComentario(props) {
   return (
-      <View style={styles.container2}>
-          <Text style={styles.titulo1} >{props.nome}</Text>
-          <Text style={styles.titulo1} >Preço: {props.preco}</Text>
-          <Button 
-            title={props.botao}
-            onPress= {() => props.navigation.navigate('Cachorro', {idProduto: props.id,} )} 
-          />
-      </View> 
-  );
+    <View style={styles.container2} >
+    <Image style={styles.imagem} source={{uri: props.foto}}></Image>
+    <View style={styles.container3}>
+      <Text style={styles.titulo1} >{props.nome}</Text>
+      <Text style={styles.titulo1} >Estrelas: {props.estrelas}</Text>
+    </View>
+  </View> 
+);
 }
 
 const styles = StyleSheet.create({
@@ -19,6 +18,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     backgroundColor: 'gray',
     marginVertical: 10,
+    marginHorizontal: 20,
     alignItems: 'center',
     padding: 10,
   },

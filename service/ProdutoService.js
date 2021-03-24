@@ -11,5 +11,9 @@ var getProduto = async (id) => {
     const response = await axios.get('http://192.168.1.8:3031/produtos/' + id);
     return response.data;
   }
+  var getComentarios = async (id) => {
+    const response = await axios.get('http://192.168.1.8:3031/produtos/' + id +'/comentarios');
+    return response.data;
+  }
 
-export { getProdutos, getProduto };
+export { getProdutos, getProduto, getComentarios};
