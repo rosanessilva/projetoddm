@@ -6,7 +6,8 @@ export default function CardComentario(props) {
     <View style={styles.container2} >
     <Image style={styles.imagem} source={{uri: props.foto}}></Image>
     <View style={styles.container3}>
-      <Text style={styles.titulo1} >{props.nome}</Text>
+      <Text style={styles.titulo1} >{props.nomepessoa}</Text>
+      <Text style={styles.texto_normal} >{props.comentario}</Text>
       <Text style={styles.titulo1} >Estrelas: {props.estrelas}</Text>
     </View>
   </View> 

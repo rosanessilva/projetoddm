@@ -11,7 +11,7 @@ export default function Comentarios(props) {
 
   useEffect(() => {
     async function loadContent() {
-      const comentarios = await getComentarios();
+      const comentarios = await getComentarios(idProduto);
       setComentarios(comentarios);
     }
     loadContent();

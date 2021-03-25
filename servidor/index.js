@@ -4,13 +4,14 @@ const port= 3031;
 
     const produtos = [
 
-            {
+              {
                 id: '1',
                 nome: 'Poodle',
                 preco: 'seu amor...',
                 descricao: 'Poodle, de acordo com a Federação Cinológica Internacional é oriunda da França, por ter sido reivindicada, porém ela já era há muito tempo criada em países da Europa Central como a Alemanha. Originalmente, era utilizado como cão de caça a aves aquáticas',
                 img: 'https://media.gazetadopovo.com.br/viver-bem/2017/02/poodle-gazeta-do-povo-viver-bem-49e1e5d0.jpg',
                 botao: 'Saber mais',
+
               },
               {
                 id: '2',
@@ -51,37 +52,91 @@ const port= 3031;
                 descricao: 'Vira-lata ou rafeiro é a denominação dada aos cães ou gatos sem raça definida, SRD, sendo CRAND e GRAND, como são geralmente referenciados em textos veterinários.',
                 img: 'https://upload.wikimedia.org/wikipedia/commons/7/70/Serena_REFON.jpg',
                 botao: 'Saber mais',
-              },
-    
+              },    
     ];
 
-    const comentarios = [
+    const comentarios = [ 
+        {
+          id: '1',
+          idProduto: '1',
+          foto: 'http://3.bp.blogspot.com/_gl58Mbhzt7A/TGBZhD806tI/AAAAAAAAAHE/DMqYuw3SrfE/s1600/rosto%20antes.jpg',
+          nomepessoa: 'Maria Clara',
+          comentario: 'Que poodle mais fofinha!!!',
+          estrelas: '5',
+        },
+        {
+          id: '2',
+          idProduto: '1',
+          foto: 'https://i.pinimg.com/originals/ca/e6/1e/cae61e84e03a0bf4bc5fe18f57d4d1b8.jpg',
+          nomepessoa: 'Mercedes',
+          comentario: 'Eles não dão muito amor...',
+          estrelas: '5',
+        },
+        {
+          id: '3',
+          idProduto: '2',
+          foto: 'https://i.pinimg.com/originals/ae/ef/f8/aeeff87b072fe0a9c06b47898d0eee23.jpg',
+          nomepessoa: 'Matheus Pontes',
+          comentario: 'Companheiro e guardião! Doberman é o melhor.',
+          estrelas: '5',
+        },
+        {
+         id: '4',
+         idProduto: '3',
+         foto: 'http://3.bp.blogspot.com/_gl58Mbhzt7A/TGBZhD806tI/AAAAAAAAAHE/DMqYuw3SrfE/s1600/rosto%20antes.jpg',
+         nomepessoa: 'Maria Clara',
+         comentario: 'Que poodle mais fofinha!!!',
+         estrelas: '5',
+       },
+       {
+         id: '5',
+         idProduto: '3',
+         foto: 'https://i.pinimg.com/originals/ca/e6/1e/cae61e84e03a0bf4bc5fe18f57d4d1b8.jpg',
+         nomepessoa: 'Mercedes',
+         comentario: 'Eles não dão muito amor...',
+         estrelas: '5',
+       },
+       {
+        id: '6',
+        idProduto: '4',
+        foto: 'https://i.pinimg.com/originals/ae/ef/f8/aeeff87b072fe0a9c06b47898d0eee23.jpg',
+        nomepessoa: 'Matheus Pontes',
+        comentario: 'Companheiro e guardião! Doberman é o melhor.',
+        estrelas: '5',
+      },
       {
-        id: '1',
-        idProduto: '1',
+        id: '7',
+        idProduto: '5',
         foto: 'http://3.bp.blogspot.com/_gl58Mbhzt7A/TGBZhD806tI/AAAAAAAAAHE/DMqYuw3SrfE/s1600/rosto%20antes.jpg',
-        nome: 'Maria Clara',
+        nomepessoa: 'Maria Clara',
         comentario: 'Que poodle mais fofinha!!!',
         estrelas: '5',
       },
       {
-        id: '2',
-        idProduto: '1',
+        id: '8',
+        idProduto: '6',
         foto: 'https://i.pinimg.com/originals/ca/e6/1e/cae61e84e03a0bf4bc5fe18f57d4d1b8.jpg',
-        nome: 'Mercedes',
+        nomepessoa: 'Mercedes',
         comentario: 'Eles não dão muito amor...',
         estrelas: '5',
       },
       {
-        id: '3',
-        idProduto: '2',
+        id: '9',
+        idProduto: '6',
         foto: 'https://i.pinimg.com/originals/ae/ef/f8/aeeff87b072fe0a9c06b47898d0eee23.jpg',
-        nome: 'Matheus Pontes',
+        nomepessoa: 'Matheus Pontes',
         comentario: 'Companheiro e guardião! Doberman é o melhor.',
         estrelas: '5',
       },
-
-    ];
+      {
+        id: '10',
+        idProduto: '6',
+        foto: 'https://i.pinimg.com/originals/ae/ef/f8/aeeff87b072fe0a9c06b47898d0eee23.jpg',
+        nomepessoa: 'Matheus Pontes',
+        comentario: 'Companheiro e guardião! Doberman é o melhor.',
+        estrelas: '5',
+      },
+   ];
 
   
 app.get('/produtos', (req, res) => {
@@ -94,8 +149,8 @@ app.get('/produtos/:id', (req, res) => {
 });
 
 app.get('/produtos/:id/comentarios', (req, res) => {
-  const comentario = comentarios.filter((produto) => produto.idProduto == req.params.idProduto);
-  res.send(comentario[0]);
+  const comentarios = comentarios.filter((comentarios) => comentarios.id == req.params.id);
+  res.send(comentarios);
 });
 
 app.listen(port, '0.0.0.0', () => {

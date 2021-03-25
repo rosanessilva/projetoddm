@@ -78,14 +78,13 @@ function Comentarios(props, { navigation }){
       name ={"Comentários"}
       >
         <View>
-          { comentarios.idProduto && 
+          { comentarios.id && 
           <CardComentario
             idComentario={comentarios.id}
-            nome ={comentarios.nome}
+            nomepessoa ={comentarios.nomepessoa}
             comentario ={comentarios.comentario}
             foto = {comentarios.foto}
             estrelas={comentarios.estrelas}
-            hideButton
           />
           }
         </View>
