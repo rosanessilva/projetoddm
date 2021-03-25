@@ -3,7 +3,7 @@ import { useNavigation } from '@react-navigation/native';
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import { View, Text } from "react-native";
+import { View } from "react-native";
 
 import { getComentarios, getProduto } from '../service/ProdutoService';
 import Card from "../components/card_descricao";
@@ -78,9 +78,9 @@ function Comentarios(props, { navigation }){
       name ={"Comentários"}
       >
         <View>
-          { comentarios.id && 
+          { comentarios.idProduto && 
           <CardComentario
-            idComentario={comentarios.id}
+            idComentario={comentarios.idComentario}
             nomepessoa ={comentarios.nomepessoa}
             comentario ={comentarios.comentario}
             foto = {comentarios.foto}

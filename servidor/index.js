@@ -57,7 +57,7 @@ const port= 3031;
 
     const comentarios = [ 
         {
-          id: '1',
+          idComentario: '1',
           idProduto: '1',
           foto: 'http://3.bp.blogspot.com/_gl58Mbhzt7A/TGBZhD806tI/AAAAAAAAAHE/DMqYuw3SrfE/s1600/rosto%20antes.jpg',
           nomepessoa: 'Maria Clara',
@@ -65,7 +65,7 @@ const port= 3031;
           estrelas: '5',
         },
         {
-          id: '2',
+          idComentario: '2',
           idProduto: '1',
           foto: 'https://i.pinimg.com/originals/ca/e6/1e/cae61e84e03a0bf4bc5fe18f57d4d1b8.jpg',
           nomepessoa: 'Mercedes',
@@ -73,7 +73,7 @@ const port= 3031;
           estrelas: '5',
         },
         {
-          id: '3',
+          idComentario: '3',
           idProduto: '2',
           foto: 'https://i.pinimg.com/originals/ae/ef/f8/aeeff87b072fe0a9c06b47898d0eee23.jpg',
           nomepessoa: 'Matheus Pontes',
@@ -81,7 +81,7 @@ const port= 3031;
           estrelas: '5',
         },
         {
-         id: '4',
+          idComentario: '4',
          idProduto: '3',
          foto: 'http://3.bp.blogspot.com/_gl58Mbhzt7A/TGBZhD806tI/AAAAAAAAAHE/DMqYuw3SrfE/s1600/rosto%20antes.jpg',
          nomepessoa: 'Maria Clara',
@@ -89,7 +89,7 @@ const port= 3031;
          estrelas: '5',
        },
        {
-         id: '5',
+        idComentario: '5',
          idProduto: '3',
          foto: 'https://i.pinimg.com/originals/ca/e6/1e/cae61e84e03a0bf4bc5fe18f57d4d1b8.jpg',
          nomepessoa: 'Mercedes',
@@ -97,7 +97,7 @@ const port= 3031;
          estrelas: '5',
        },
        {
-        id: '6',
+        idComentario: '6',
         idProduto: '4',
         foto: 'https://i.pinimg.com/originals/ae/ef/f8/aeeff87b072fe0a9c06b47898d0eee23.jpg',
         nomepessoa: 'Matheus Pontes',
@@ -105,7 +105,7 @@ const port= 3031;
         estrelas: '5',
       },
       {
-        id: '7',
+        idComentario: '7',
         idProduto: '5',
         foto: 'http://3.bp.blogspot.com/_gl58Mbhzt7A/TGBZhD806tI/AAAAAAAAAHE/DMqYuw3SrfE/s1600/rosto%20antes.jpg',
         nomepessoa: 'Maria Clara',
@@ -113,7 +113,7 @@ const port= 3031;
         estrelas: '5',
       },
       {
-        id: '8',
+        idComentario: '8',
         idProduto: '6',
         foto: 'https://i.pinimg.com/originals/ca/e6/1e/cae61e84e03a0bf4bc5fe18f57d4d1b8.jpg',
         nomepessoa: 'Mercedes',
@@ -121,7 +121,7 @@ const port= 3031;
         estrelas: '5',
       },
       {
-        id: '9',
+        idComentario: '9',
         idProduto: '6',
         foto: 'https://i.pinimg.com/originals/ae/ef/f8/aeeff87b072fe0a9c06b47898d0eee23.jpg',
         nomepessoa: 'Matheus Pontes',
@@ -129,7 +129,7 @@ const port= 3031;
         estrelas: '5',
       },
       {
-        id: '10',
+        idComentario: '10',
         idProduto: '6',
         foto: 'https://i.pinimg.com/originals/ae/ef/f8/aeeff87b072fe0a9c06b47898d0eee23.jpg',
         nomepessoa: 'Matheus Pontes',
@@ -148,9 +148,9 @@ app.get('/produtos/:id', (req, res) => {
   res.send(produto[0]);
 });
 
-app.get('/produtos/:id/comentarios', (req, res) => {
-  const comentarios = comentarios.filter((comentarios) => comentarios.id == req.params.id);
-  res.send(comentarios);
+app.get('/produtos/:idProduto/comentarios', (req, res) => {
+  const comentario = comentarios.filter((comentarios) => comentarios.idProduto == req.params.idProduto);
+  res.send(comentario);
 });
 
 app.listen(port, '0.0.0.0', () => {

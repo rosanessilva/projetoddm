@@ -20,7 +20,8 @@ export default function Comentarios(props) {
   var desenhandoComentarios = ({ item  }) => {
     return <CardComentario
     {... props}
-    idComentario={item.id}
+    idComentario={item.idComentario}
+    idProduto = {item.idProduto}
     nome={item.nome}
     estrelas={item.estrelas}
     foto= {item.foto}
@@ -34,7 +35,7 @@ export default function Comentarios(props) {
       <FlatList 
         data= {comentarios}
         renderItem= {desenhandoComentarios}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item) => item.idProduto}
       />
     </View> 
   );
