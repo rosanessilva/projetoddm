@@ -3,13 +3,13 @@ import { StyleSheet, Text, View, Image } from "react-native";
 
 export default function CardComentario(props) {
   return (
-    <View style={styles.container2} >
+  <View style={styles.container2} >
     <Image style={styles.imagem} source={{uri: props.foto}}></Image>
-    <View style={styles.container3}>
-      <Text style={styles.titulo1} >{props.nomepessoa}</Text>
-      <Text style={styles.texto_normal} >{props.comentario}</Text>
-      <Text style={styles.titulo1} >Estrelas: {props.estrelas}</Text>
-    </View>
+      <View style={styles.container3}>
+        <Text style={styles.titulo1} >{props.nomepessoa}</Text>
+        <Text style={styles.texto_normal} >{props.comentario}</Text>
+        <Text style={styles.titulo1} >Estrelas: {props.estrelas}</Text>
+      </View>
   </View> 
 );
 }

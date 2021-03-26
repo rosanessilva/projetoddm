@@ -3,9 +3,9 @@ import { useNavigation } from '@react-navigation/native';
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import { View } from "react-native";
+import { StyleSheet, FlatList, View } from "react-native";
 
-import { getComentarios, getProduto } from '../service/ProdutoService';
+import { getComentarios , getProduto } from '../service/ProdutoService';
 import Card from "../components/card_descricao";
 import CardComentario from "../components/card_comentarios";
 
@@ -64,7 +64,8 @@ function HomeScreen(props, {navigation}){
 
 function Comentarios(props, { navigation }){
 
-  const [comentarios, setComentario] = useState({});
+  const [comentarios, setComentario] = useState([]);
+
   useEffect(() => {
     async function loadContent() {
       const comentarios = await getComentarios(props.idProduto);
@@ -73,21 +74,26 @@ function Comentarios(props, { navigation }){
     loadContent();
   });
 
+    var desenhandoItens = ({ item  }) => {
+      return  <CardComentario
+      nomepessoa ={item.nomepessoa}
+      comentario ={item.comentario}
+      foto = {item.foto}
+      estrelas={item.estrelas}
+    />;
+    }
     return <BaseScreen
       navigation = {navigation}
       name ={"Comentários"}
       >
-        <View>
-          { comentarios.idProduto && 
-          <CardComentario
-            idComentario={comentarios.idComentario}
-            nomepessoa ={comentarios.nomepessoa}
-            comentario ={comentarios.comentario}
-            foto = {comentarios.foto}
-            estrelas={comentarios.estrelas}
-          />
-          }
-        </View>
+     <View style={styles.container1}>
+        <FlatList 
+          data= {comentarios}
+          renderItem= {desenhandoItens}
+          keyExtractor={(item) => item.id}
+        />
+    </View> 
+        
     </BaseScreen>
 }
 
@@ -112,3 +118,13 @@ export default function Produto(props) {
   );
  
 }
+
+const styles = StyleSheet.create({
+ 
+  container1: {
+    flex: 1,
+    paddingTop: 20,
+  },
+ 
+});
+ 

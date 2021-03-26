@@ -11,7 +11,7 @@ export default function Comentarios(props) {
 
   useEffect(() => {
     async function loadContent() {
-      const comentarios = await getComentarios(idProduto);
+      const comentarios = await getComentarios();
       setComentarios(comentarios);
     }
     loadContent();
@@ -21,8 +21,8 @@ export default function Comentarios(props) {
     return <CardComentario
     {... props}
     idComentario={item.idComentario}
-    idProduto = {item.idProduto}
-    nome={item.nome}
+    idProduto={item.idProduto}
+    nome={item.nomepessoa}
     estrelas={item.estrelas}
     foto= {item.foto}
     comentario = {item.comentario}
@@ -35,7 +35,7 @@ export default function Comentarios(props) {
       <FlatList 
         data= {comentarios}
         renderItem= {desenhandoComentarios}
-        keyExtractor={(item) => item.idProduto}
+        keyExtractor={(item) => item.idComentario}
       />
     </View> 
   );
