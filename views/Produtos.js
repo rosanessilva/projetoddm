@@ -44,7 +44,8 @@ export default function Produtos(props) {
 const styles = StyleSheet.create({
   container1: {
     flex: 1,
-    paddingTop: 20,
+    paddingTop: 15,
+    marginHorizontal: 30,
   },
  
 });

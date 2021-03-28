@@ -3,31 +3,6 @@ import { useState } from 'react';
 import { StyleSheet, Text, View, Image } from "react-native";
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
-/*const [stars, setStars] = useState(0);
-const [maxstars, setMaxstars] = useState([1,2,3,4,5]);
-const imgstar = 'https://raw.githubusercontent.com/AboutReact/sampleresource/master/star_filled.png';
-const Estrela =(props)=>{
-  return(
-    <View>
-      {maxstars.map((props.estrelas, key)=>{
-        return(
-          <Ionicons name='star-outline' 
-          key={item}
-          onPress={()=> setStars(props.estrelas)}>
-            <Image> source={
-              props.estrelas<= stars
-              ? {uri: imgstar}
-              : {uri: imgstar}
-              } </Image>
-          </Ionicons>
-        );
-      });
-      }
-    </View>
-  );
-}
-*/
- 
   export default function CardComentario(props) {
 
     criaestrelas = () => {
@@ -63,7 +38,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     backgroundColor: 'gray',
     marginVertical: 10,
-    marginHorizontal: 20,
+    marginHorizontal: 30,
     alignItems: 'center',
     padding: 10,
   },
