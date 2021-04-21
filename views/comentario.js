@@ -17,6 +17,12 @@ export default function Comentarios(props) {
     loadContent();
   });
 
+  if (comentarios == '') {
+    <Text>Ainda não há comentários sobre esse produto.</Text>
+  } else {
+
+
+
   var desenhandoComentarios = ({ item  }) => {
     return <CardComentario
     {... props}
@@ -35,12 +41,12 @@ export default function Comentarios(props) {
       <FlatList 
         data= {comentarios}
         renderItem= {desenhandoComentarios}
-        keyExtractor={(item) => item.idComentario}
+        keyExtractor={(item) => item.id}
       />
     </View> 
   );
 }
-
+}
 const styles = StyleSheet.create({
   container1: {
     flex: 1,

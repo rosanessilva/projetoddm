@@ -3,15 +3,17 @@ import { useNavigation } from '@react-navigation/native';
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import { StyleSheet, FlatList, View } from "react-native";
+import { StyleSheet, FlatList, View, Alert } from "react-native";
 
-import { getComentarios , getProduto } from '../service/ProdutoService';
+import { getComentarios , getProduto, postComentario } from '../service/ProdutoService';
 import Card from "../components/card_descricao";
 import CardComentario from "../components/card_comentarios";
 
 
+
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
+
 
 function BaseScreen(props) {
   const navigation = useNavigation();
@@ -26,12 +28,24 @@ function BaseScreen(props) {
             color="#000"
             onPress={() => navigation.navigate("bichos")} //verificar pq não está voltando...
           />,
-        }} /> 
+            headerRightContainerStyle: { paddingRight: 20 },
+            headerRight: () => <Ionicons
+            name= "add-outline"
+              size={25}
+              color="#000"
+              onPress={() =>  navigation.navigate("cadastrar_comentarios") } //verificar pq não está voltando...
+            />,
+            
+        }} 
+          initialParams= {{idProduto: props.idProduto}} 
+        /> 
+       
     </Stack.Navigator>
   )
 }
-function HomeScreen(props, {navigation}){
-  
+
+function HomeScreen(props, { navigation }){
+
   const [produto, setProduto] = useState({});
   
   useEffect(() => {
@@ -64,11 +78,12 @@ function HomeScreen(props, {navigation}){
 
 function Comentarios(props, { navigation }){
 
+
   const [comentarios, setComentario] = useState([]);
 
   useEffect(() => {
     async function loadContent() {
-      const comentarios = await getComentarios(props.idProduto);
+      const comentarios = await getComentarios(props.idProduto, props.idComentario);
       setComentario(comentarios);
     }
     loadContent();
@@ -76,6 +91,8 @@ function Comentarios(props, { navigation }){
 
     var desenhandoItens = ({ item  }) => {
       return  <CardComentario
+      idComentario ={item.idComentario}
+      idProduto ={item.idProduto}
       nomepessoa ={item.nomepessoa}
       comentario ={item.comentario}
       foto = {item.foto}
@@ -90,7 +107,7 @@ function Comentarios(props, { navigation }){
         <FlatList 
           data= {comentarios}
           renderItem= {desenhandoItens}
-          keyExtractor={(item) => item.id}
+          keyExtractor={(item) => item.idComentario}
         />
     </View> 
         
@@ -98,14 +115,17 @@ function Comentarios(props, { navigation }){
 }
 
 export default function Produto(props) {
+  
   return (
+
       <Tab.Navigator>
         <Tab.Screen
           options={{
             tabBarIcon: ({ color, size }) => <Ionicons name='information-circle-outline' size={size} color={color} />
           }}
           name="Informações">
-          {() => <HomeScreen idProduto={props.route.params.idProduto} />}
+            
+          {() => <HomeScreen idProduto={props.route.params.idProduto}/>}
         </Tab.Screen>
         <Tab.Screen 
           options={{
@@ -115,6 +135,7 @@ export default function Produto(props) {
           {() => <Comentarios idProduto={props.route.params.idProduto}/>} 
           </Tab.Screen>
       </Tab.Navigator>
+    
   );
  
 }

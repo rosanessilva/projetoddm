@@ -2,7 +2,10 @@ const express = require ('express');
 const app = express();
 const port= 3031;
 
-    const produtos = [
+app.use(express.json());
+
+
+    var produtos = [
 
               {
                 id: '1',
@@ -55,7 +58,7 @@ const port= 3031;
               },    
     ];
 
-    const comentarios = [ 
+    var comentarios = [ 
         {
           idComentario: '1',
           idProduto: '1',
@@ -199,6 +202,10 @@ app.get('/produtos', (req, res) => {
   res.send(produtos);
 });
 
+app.get('/comentarios', (req, res) => {
+  res.send(comentarios);
+});
+
 app.get('/produtos/:id', (req, res) => {
   const produto = produtos.filter((produto) => produto.id == req.params.id);
   res.send(produto[0]);
@@ -207,6 +214,33 @@ app.get('/produtos/:id', (req, res) => {
 app.get('/produtos/:idProduto/comentarios', (req, res) => {
   const comentario = comentarios.filter((comentarios) => comentarios.idProduto == req.params.idProduto);
   res.send(comentario);
+});
+//Adição de comentário
+app.post('/produtos/:idProduto/comentarios', (req,res) => {
+  console.log(req.body);
+  const novoComentario = req.body;
+  novoComentario.idComentario = comentarios.length+1;
+  comentarios.push(novoComentario);
+  console.log(novoComentario);
+  res.send(novoComentario);
+});
+
+/* app.post('/comentarios', (req,res) => {
+  const novoComentario = req.body;
+  novoComentario.idComentario = comentarios.length+1;
+  comentarios.push(novoComentario);
+  console.log(novoComentario);
+  res.send(novoComentario);
+}); */
+  //Mostrar apenas um comentário específicio de um produto
+app.get('/produtos/:idProduto/comentarios/:idComentario', (req, res) => {
+  const comentario = comentarios.filter((comentario) => comentario.idComentario == req.params.idComentario);
+  res.send(comentario[0]);
+});
+
+app.delete('/produtos/:idProduto/comentarios/:idComentario', (req,res) => {
+  comentarios = comentarios.filter((comentario) => comentario.idComentario != req.params.idComentario);  
+  res.send(comentarios);
 });
 
 app.listen(port, '0.0.0.0', () => {

@@ -1,7 +1,8 @@
 import React  from 'react';
-import { useState } from 'react';
-import { StyleSheet, Text, View, Image } from "react-native";
+import { StyleSheet, Text, View, Image} from "react-native";
 import Ionicons from 'react-native-vector-icons/Ionicons';
+
+import { removerComentario } from '../service/ProdutoService';
 
   export default function CardComentario(props) {
 
@@ -22,6 +23,11 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
         <View style={styles.container2} >
           <Image style={styles.imagem} source={{uri: props.foto}}></Image>
             <View style={styles.container3}>
+            <View alignItems="flex-end">
+              <Ionicons name="close-circle-outline" size={20}
+              onPress={() => removerComentario(props.idProduto, props.idComentario) } 
+            />
+            </View>
               <Text style={styles.titulo1} >{props.nomepessoa}</Text>
               <Text style={styles.texto_normal} >{props.comentario}</Text>
               <Text style={styles.titulo1} >Estrelas: {criaestrelas()}
@@ -39,7 +45,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'gray',
     marginVertical: 10,
     marginHorizontal: 30,
-    alignItems: 'center',
+    alignItems:'center',
     padding: 10,
   },
   container3: {
