@@ -6,7 +6,7 @@ export default function Card(props) {
       <View style={styles.container2} >
         <Image style={styles.imagem} source={{uri: props.img}}></Image>
         <View style={styles.container3} 
-          onStartShouldSetResponder={() => props.navigation.navigate('bicho', {idProduto: props.id,} )} >
+          onStartShouldSetResponder={() => {console.log("Card", props.id); props.navigation.navigate('bicho', {idProduto: props.id,} )}} >
           <Text style={styles.titulo1} >{props.nome}</Text>
           <Text style={styles.titulo1} >Preço: {props.preco}</Text>
           <View style={styles.containerBotao}>

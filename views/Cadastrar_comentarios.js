@@ -1,39 +1,45 @@
 import React, {useState} from "react";
-import { useNavigation } from '@react-navigation/native';
 import { View, TextInput, Text, StyleSheet, Button, Alert} from 'react-native';
 
 import { postComentario } from '../service/ProdutoService';
  
 
 export default function Cadastro(props){
-    
+
+idProduto = props.route.params.idProduto;
+const idproduto = idProduto;
+//console.log('Cadastrar comentarios: ', props)
+
 const [comentario, setComentario] = useState(''); 
-const idproduto =  props.idProduto ; 
-console.log('Cadastrar produto: ', props)
-navigation = useNavigation();
+const [estrelas, setEstrelas] = useState(''); 
+
   return (
       
                         <View>
-                            <Text style={styles.text_input}>{idproduto}</Text>
+                            <Text style={styles.text_input}>{idProduto}</Text>
                             <Text style={styles.text_input}>Digite seu comentário:</Text>
                             <TextInput style={styles.input}
                                 onChangeText={setComentario}
                                 value={comentario}
                                 multiline/>
+                            <Text style={styles.text_input}>Quantas estrelas de 1 a 5:</Text>
+                            <TextInput style={styles.input1}
+                                onChangeText={setEstrelas}
+                                value={estrelas}
+                                />
                         <View style={{flexWrap: "nowrap", alignItems: 'center', marginTop: 20}}>
                         <Button   
                             title = 'Cadastrar'
                             onPress={() => {
-                                if (comentario != "") {
+                                if (comentario && estrelas != "") {
                                     postComentario({
                                         comentario: comentario,
-                                        estrelas: '3',
+                                        estrelas: estrelas,
                                         foto: 'https://image.flaticon.com/icons/png/512/16/16410.png',
                                         nomepessoa: 'Fulanx',
                                         idProduto: idproduto,
-                                    }),
+                                    }, idProduto),
                                     Alert.alert('Comentário incluso com sucesso.')
-                                   // navigation.goBack();
                                 } else{
                                     Alert.alert('Todos os campos são obrigatórios.')
                                 }
@@ -55,7 +61,16 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         margin: 5,
         marginHorizontal: 30,
-        height: 200,
+        height: 100,
+        backgroundColor: "white",
+        textAlign: "justify",
+        textAlignVertical: "top",
+    },
+    input1:{
+        borderColor: "gray",
+        borderWidth: 1,
+        margin: 5,
+        marginHorizontal: 30,
         backgroundColor: "white",
         textAlign: "justify",
         textAlignVertical: "top",

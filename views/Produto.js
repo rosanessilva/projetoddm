@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigation } from '@react-navigation/native';
+import {  useNavigation } from '@react-navigation/native';
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -8,6 +8,7 @@ import { StyleSheet, FlatList, View, Alert } from "react-native";
 import { getComentarios , getProduto, postComentario } from '../service/ProdutoService';
 import Card from "../components/card_descricao";
 import CardComentario from "../components/card_comentarios";
+import CadastrarComentarios from './Cadastrar_comentarios';
 
 
 
@@ -33,13 +34,17 @@ function BaseScreen(props) {
             name= "add-outline"
               size={25}
               color="#000"
-              onPress={() =>  navigation.navigate("cadastrar_comentarios") } //verificar pq não está voltando...
-            />,
-            
+              onPress={() => { console.log("OnPress", props.idProduto); navigation.navigate('cadastrar_comentarios',{idProduto: props.idProduto}, )}} //verificar pq não está voltando...
+            />,       
         }} 
-          initialParams= {{idProduto: props.idProduto}} 
+
         /> 
-       
+        <Stack.Screen 
+           name="cadastrar_comentarios" 
+           component={ CadastrarComentarios}
+            initialParams={{ idProduto: props.idProduto  }}     
+           options={{ title: 'Cadastrar Comentários' }}
+           />
     </Stack.Navigator>
   )
 }
@@ -57,6 +62,7 @@ function HomeScreen(props, { navigation }){
   });
 
     return <BaseScreen
+     idProduto = {props.idProduto}
       navigation = {navigation}
       name ={"Bicho Selecionado"}
       >
@@ -77,8 +83,6 @@ function HomeScreen(props, { navigation }){
 }
 
 function Comentarios(props, { navigation }){
-
-
   const [comentarios, setComentario] = useState([]);
 
   useEffect(() => {
@@ -92,7 +96,7 @@ function Comentarios(props, { navigation }){
     var desenhandoItens = ({ item  }) => {
       return  <CardComentario
       idComentario ={item.idComentario}
-      idProduto ={item.idProduto}
+      idProduto ={item.id}
       nomepessoa ={item.nomepessoa}
       comentario ={item.comentario}
       foto = {item.foto}
@@ -100,6 +104,7 @@ function Comentarios(props, { navigation }){
     />;
     }
     return <BaseScreen
+      idProduto = {props.idProduto}
       navigation = {navigation}
       name ={"Comentários"}
       >
@@ -112,6 +117,7 @@ function Comentarios(props, { navigation }){
     </View> 
         
     </BaseScreen>
+    
 }
 
 export default function Produto(props) {

@@ -217,22 +217,13 @@ app.get('/produtos/:idProduto/comentarios', (req, res) => {
 });
 //Adição de comentário
 app.post('/produtos/:idProduto/comentarios', (req,res) => {
-  console.log(req.body);
+ // console.log(req.body);
   const novoComentario = req.body;
   novoComentario.idComentario = comentarios.length+1;
   comentarios.push(novoComentario);
-  console.log(novoComentario);
   res.send(novoComentario);
 });
 
-/* app.post('/comentarios', (req,res) => {
-  const novoComentario = req.body;
-  novoComentario.idComentario = comentarios.length+1;
-  comentarios.push(novoComentario);
-  console.log(novoComentario);
-  res.send(novoComentario);
-}); */
-  //Mostrar apenas um comentário específicio de um produto
 app.get('/produtos/:idProduto/comentarios/:idComentario', (req, res) => {
   const comentario = comentarios.filter((comentario) => comentario.idComentario == req.params.idComentario);
   res.send(comentario[0]);

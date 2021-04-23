@@ -25,7 +25,8 @@ var getProduto = async (id) => {
       const response = await axios.get('http://192.168.1.6:3031/comentarios');
       return response.data;
     }
-  var postComentario = async (idProduto, comentario) => {
+  var postComentario = async (comentario, idProduto) => {
+    //console.log("IdProduto: ", idProduto, "Comentario: ", comentario);
     const response = await axios.post('http://192.168.1.6:3031/produtos/'+ idProduto+'/comentarios', comentario);
     return response.data;
   }
