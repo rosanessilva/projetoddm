@@ -35,7 +35,7 @@ function BaseScreen(props) {
             name= "add-outline"
               size={25}
               color="#000"
-              onPress={() => { console.log("OnPress", props.idProduto); navigation.navigate('cadastrar_comentarios',{idProduto: props.idProduto}, )}} //verificar pq não está voltando...
+              onPress={() => navigation.navigate('cadastrar_comentarios',{idProduto: props.idProduto}, )} //verificar pq não está voltando...
             />,       
         }} 
 

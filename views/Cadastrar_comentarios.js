@@ -1,6 +1,6 @@
 import React, {useState} from "react";
-import { View, TextInput, Text, StyleSheet, Button, Alert} from 'react-native';
-
+import { View, TextInput, Text, StyleSheet, Button, Alert, TouchableOpacity, Image} from 'react-native';
+//import { TouchableOpacity } from "react-native-gesture-handler";
 import { postComentario } from '../service/ProdutoService';
  
 
@@ -8,12 +8,42 @@ export default function Cadastro(props){
 
 idProduto = props.route.params.idProduto;
 const idproduto = idProduto;
-//console.log('Cadastrar comentarios: ', props)
 
 const [comentario, setComentario] = useState(''); 
-const [estrelas, setEstrelas] = useState(''); 
+const [inicioestrelas, setInicioestrela] = useState(0); 
+const [max_estrelas, setMax_estrelas] = useState([1,2,3,4,5]);   
+const estreladesmarcadaimg = 'https://raw.githubusercontent.com/tranhonghan/images/main/star_filled.png'
+const estrelamarcadaimg = 'https://raw.githubusercontent.com/tranhonghan/images/main/star_corner.png'
 
-  return (
+const GerandoEstrelas = () => {
+    return(
+        <View style={styles.gerandoestrelas}>
+        { 
+           max_estrelas.map((item, key) => {
+                return(
+                    <TouchableOpacity
+                    activeOpacity={0.7}
+                    key={item}
+                    onPress={() => setInicioestrela(item)}
+                    >
+                    <Image
+                        style={styles.imagem_estrela}
+                        source={
+                            item <= inicioestrelas
+                            ? {uri: estreladesmarcadaimg }
+                            : {uri: estrelamarcadaimg}
+                        }
+                    />
+
+                    </TouchableOpacity>
+                )
+            })
+        }
+        </View>
+    )
+}
+
+return (
       
                         <View>
                            <Text style={styles.text_input}>Digite seu comentário:</Text>
@@ -21,19 +51,17 @@ const [estrelas, setEstrelas] = useState('');
                                 onChangeText={setComentario}
                                 value={comentario}
                                 multiline/>
-                            <Text style={styles.text_input}>Quantas estrelas de 1 a 5:</Text>
-                            <TextInput style={styles.input1}
-                                onChangeText={setEstrelas}
-                                value={estrelas}
-                                />
+                           <GerandoEstrelas
+                           />
+                           
                         <View style={{flexWrap: "nowrap", alignItems: 'center', marginTop: 20}}>
                         <Button   
                             title = 'Cadastrar'
                             onPress={() => {
-                                if (comentario && estrelas != "") {
+                                if (comentario && inicioestrelas!= "") {
                                     postComentario({
                                         comentario: comentario,
-                                        estrelas: estrelas,
+                                        estrelas: inicioestrelas,
                                         foto: 'https://i.pinimg.com/564x/53/55/55/5355558c7f21338f5f6174f3e2456935.jpg',
                                         nomepessoa: 'Fulanx',
                                         idProduto: idproduto,
@@ -79,5 +107,16 @@ const styles = StyleSheet.create({
         marginLeft: 30,
         marginTop: 10,
     },
+    gerandoestrelas:{
+        justifyContent: 'center',
+        marginTop: 30,
+        flexDirection:'row'
+        
+    },
+    imagem_estrela:{
+        width: 40,
+        height:40,
+        resizeMode: 'cover'
+    }
 
 });
