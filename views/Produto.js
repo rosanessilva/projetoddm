@@ -4,6 +4,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { StyleSheet, FlatList, View, Alert } from "react-native";
+import { AdMobBanner } from 'expo-ads-admob';
 
 import { getComentarios , getProduto, postComentario } from '../service/ProdutoService';
 import Card from "../components/card_descricao";
@@ -43,7 +44,15 @@ function BaseScreen(props) {
            name="cadastrar_comentarios" 
            component={ CadastrarComentarios}
             initialParams={{ idProduto: props.idProduto  }}     
-           options={{ title: 'Cadastrar Comentários' }}
+           options={{ title: 'Cadastrar Comentários',
+ /*          headerRightContainerStyle: { paddingRight: 20 },
+           headerRight: () => <Ionicons
+           name= "checkmark-outline"
+             size={25}
+             color="#000"
+             onPress={() => { console.log("OnPress", props.idProduto); navigation.navigate({'cadastrar_comentarios'},{idProduto: props.idProduto}, )}} //verificar pq não está voltando...
+           />,*/
+            }}
            />
     </Stack.Navigator>
   )
@@ -78,6 +87,11 @@ function HomeScreen(props, { navigation }){
             hideButton
           />
           }
+          <AdMobBanner
+            bannerSize="fullBanner"
+            adUnitID="ca-app-pub-3940256099942544/6300978111" // Test ID, Replace with your-admob-unit-id
+            servePersonalizedAds // true or false
+            onDidFailToReceiveAdWithError={this.bannerError} />
         </View>
     </BaseScreen>
 }

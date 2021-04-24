@@ -12,7 +12,6 @@ export default function Card(props) {
           <View style={styles.containerBotao}>
         </View>
         </View>
-
       </View> 
   );
 }

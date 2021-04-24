@@ -1,4 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
+import { AdMobBanner } from 'expo-ads-admob';
 import React, {useState, useEffect} from 'react';
 import { StyleSheet, View, FlatList} from 'react-native';
 
@@ -37,6 +38,11 @@ export default function Produtos(props) {
         renderItem= {desenhandoItens}
         keyExtractor={(item) => item.id}
       />
+        <AdMobBanner
+          bannerSize="fullBanner"
+          adUnitID="ca-app-pub-3940256099942544/6300978111" // Test ID, Replace with your-admob-unit-id
+          servePersonalizedAds // true or false
+          onDidFailToReceiveAdWithError={this.bannerError} />
     </View> 
   );
 }

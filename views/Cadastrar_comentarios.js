@@ -16,8 +16,7 @@ const [estrelas, setEstrelas] = useState('');
   return (
       
                         <View>
-                            <Text style={styles.text_input}>{idProduto}</Text>
-                            <Text style={styles.text_input}>Digite seu comentário:</Text>
+                           <Text style={styles.text_input}>Digite seu comentário:</Text>
                             <TextInput style={styles.input}
                                 onChangeText={setComentario}
                                 value={comentario}
@@ -35,7 +34,7 @@ const [estrelas, setEstrelas] = useState('');
                                     postComentario({
                                         comentario: comentario,
                                         estrelas: estrelas,
-                                        foto: 'https://image.flaticon.com/icons/png/512/16/16410.png',
+                                        foto: 'https://i.pinimg.com/564x/53/55/55/5355558c7f21338f5f6174f3e2456935.jpg',
                                         nomepessoa: 'Fulanx',
                                         idProduto: idproduto,
                                     }, idProduto),
